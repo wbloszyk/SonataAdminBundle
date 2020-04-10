@@ -42,16 +42,31 @@ class AdminSearchBlockService extends AbstractBlockService
     protected $searchHandler;
 
     /**
-     * NEXT_MAJOR: Remove `$templating` argument.
+     * NEXT_MAJOR: Remove deprecated arguments.
      *
-     * @param Environment|string $twigOrName
+     * @param Environment|EngineInterface|string $deprecatedNameOrEnvironment
+     * @param EngineInterface|null|Pool          $deprecatedEngineOrPool
+     * @param Pool|SearchHandler                 $deprecatedPoolOrSearchHandler
+     * @param SearchHandler|null                 $deprecatedSearchHandler
      */
-    public function __construct($twigOrName, ?EngineInterface $templating, Pool $pool, SearchHandler $searchHandler)
+    public function __construct(
+        $deprecatedNameOrEnvironment,
+        $deprecatedEngineOrPool,
+        $deprecatedPoolOrSearchHandler,
+        $deprecatedSearchHandler
+    )
     {
-        parent::__construct($twigOrName, $templating);
+        if ($deprecatedEngineOrPool instanceof Pool) {
+            parent::__construct($deprecatedNameOrEnvironment);
 
-        $this->pool = $pool;
-        $this->searchHandler = $searchHandler;
+            $this->pool = $deprecatedEngineOrPool;
+            $this->searchHandler = $deprecatedSearchHandler;
+        } else {
+            parent::__construct($deprecatedNameOrEnvironment, $deprecatedEngineOrPool);
+
+            $this->pool = $deprecatedPoolOrSearchHandler;
+            $this->searchHandler = $deprecatedSearchHandler;
+        }
     }
 
     public function execute(BlockContextInterface $blockContext, Response $response = null)

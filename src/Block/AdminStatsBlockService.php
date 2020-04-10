@@ -34,15 +34,29 @@ class AdminStatsBlockService extends AbstractBlockService
     protected $pool;
 
     /**
-     * NEXT_MAJOR: Remove `$templating` argument.
+     * NEXT_MAJOR: Remove deprecated arguments.
      *
-     * @param Environment|string $twigOrName
+     * @param Environment|EngineInterface|string $deprecatedNameOrEnvironment
+     * @param EngineInterface|null|Pool          $deprecatedEngineOrPool
+     * @param Pool|null                          $deprecatedPool
      */
-    public function __construct($twigOrName, ?EngineInterface $templating, Pool $pool)
+    public function __construct
+    (
+        $deprecatedNameOrEnvironment,
+        $deprecatedEngineOrPool,
+        $deprecatedPool = null
+    )
     {
-        parent::__construct($twigOrName, $templating);
+        if ($deprecatedEngineOrPool instanceof Pool) {
+            parent::__construct($deprecatedNameOrEnvironment);
 
-        $this->pool = $pool;
+            $this->pool = $deprecatedEngineOrPool;
+        } else {
+            parent::__construct($deprecatedNameOrEnvironment, $deprecatedEngineOrPool);
+
+            $this->pool = $deprecatedPool;
+        }
+
     }
 
     public function execute(BlockContextInterface $blockContext, Response $response = null)

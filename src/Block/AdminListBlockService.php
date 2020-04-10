@@ -41,20 +41,31 @@ class AdminListBlockService extends AbstractBlockService
     private $templateRegistry;
 
     /**
-     * NEXT_MAJOR: Remove `$templating` argument.
+     * NEXT_MAJOR: Remove deprecated arguments.
      *
-     * @param Environment|string $twigOrName
+     * @param Environment|EngineInterface|string  $deprecatedNameOrEnvironment
+     * @param EngineInterface|null|Pool           $deprecatedEngineOrPool
+     * @param Pool|TemplateRegistryInterface|null $deprecatedPoolOrTemplateRegistry
+     * @param TemplateRegistryInterface|null      $deprecatedTemplateRegistry
      */
     public function __construct(
-        $twigOrName,
-        ?EngineInterface $templating,
-        Pool $pool,
-        TemplateRegistryInterface $templateRegistry = null
+        $deprecatedNameOrEnvironment,
+        $deprecatedEngineOrPool,
+        $deprecatedPoolOrTemplateRegistry,
+        $deprecatedTemplateRegistry
     ) {
-        parent::__construct($twigOrName, $templating);
+        if ($deprecatedEngineOrPool instanceof Pool) {
+            parent::__construct($deprecatedNameOrEnvironment);
 
-        $this->pool = $pool;
-        $this->templateRegistry = $templateRegistry ?: new TemplateRegistry();
+            $this->pool = $deprecatedEngineOrPool;
+            $this->templateRegistry = $deprecatedPoolOrTemplateRegistry ?: new TemplateRegistry();
+        } else {
+            parent::__construct($deprecatedNameOrEnvironment, $deprecatedEngineOrPool);
+
+            $this->pool = $deprecatedPoolOrTemplateRegistry;
+            $this->templateRegistry = $deprecatedTemplateRegistry ?: new TemplateRegistry();
+        }
+
     }
 
     public function execute(BlockContextInterface $blockContext, Response $response = null)
