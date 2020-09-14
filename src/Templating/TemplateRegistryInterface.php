@@ -34,4 +34,6 @@ interface TemplateRegistryInterface
 
     // NEXT_MAJOR: Uncomment the following method
     // public function hasTemplate(string $name): bool;
+
+    public function getLayout(): string;
 }

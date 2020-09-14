@@ -69,6 +69,8 @@ final class TemplateRegistry implements MutableTemplateRegistryInterface
      */
     private $templates = [];
 
+    private $layout;
+
     /**
      * @param string[] $templates
      */
@@ -119,5 +121,20 @@ final class TemplateRegistry implements MutableTemplateRegistryInterface
     public function setTemplate($name, $template)
     {
         $this->templates[$name] = $template;
+    }
+
+    public function getLayout(): string
+    {
+        // NEXT_MAJOR remove this hack
+        if ('admin_lte2' === $this->layout) {
+            return '';
+        }
+
+        return $this->layout;
+    }
+
+    public function setLayout(string $layout): void
+    {
+        $this->layout = $layout;
     }
 }
