@@ -9,11 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{%- apply trim|raw %}
-    {%- if value is null -%}
-        &nbsp;
-    {%- else -%}
-        {% set value = value * 100 %}
-        {{ value }} %
-    {%- endif -%}
-{% endapply -%}
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/display_percent.html.twig' %}

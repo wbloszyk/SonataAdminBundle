@@ -1,8 +1,12 @@
-<a class="btn btn-link btn-flat" href="{{ action.url }}">
-    {{ action.icon|parse_icon }}
-    {% if action.translation_domain is defined and action.translation_domain is same as(false) %}
-        {{ action.label }}
-    {% else %}
-        {{ action.label|trans({}, action.translation_domain|default('SonataAdminBundle')) }}
-    {% endif %}
-</a>
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/dashboard__action.html.twig' %}

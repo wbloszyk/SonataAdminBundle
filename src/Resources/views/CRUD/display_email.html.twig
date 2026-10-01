@@ -9,23 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{%- apply trim|raw %}
-    {%- if value is empty -%}
-        &nbsp;
-    {%- elseif as_string|default(false) -%}
-        {{ value }}
-    {%- else -%}
-        {% set parameters = {} %}
-
-        {% if subject|default(null) is not empty %}
-            {% set parameters = parameters|merge({'subject': subject}) %}
-        {% endif %}
-        {% if body|default(null) is not empty %}
-            {% set parameters = parameters|merge({'body': body}) %}
-        {% endif %}
-
-        <a href="mailto:{{ value }}{% if parameters|length > 0 %}?{{- parameters|url_encode -}}{% endif %}">
-            {{- value -}}
-        </a>
-    {%- endif -%}
-{% endapply -%}
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/display_email.html.twig' %}

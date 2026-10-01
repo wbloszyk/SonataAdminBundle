@@ -9,6 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{%- include '@SonataAdmin/CRUD/display_datetime.html.twig' with {
-    value: revision.timestamp,
-} only -%}
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/history_revision_timestamp.html.twig' %}

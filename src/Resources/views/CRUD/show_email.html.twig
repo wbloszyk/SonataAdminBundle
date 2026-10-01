@@ -1,10 +1,12 @@
-{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+{#
 
-{% block field %}
-    {% include '@SonataAdmin/CRUD/display_email.html.twig' with {
-        value: value,
-        as_string: field_description.option('as_string'),
-        subject: field_description.option('subject'),
-        body: field_description.option('body'),
-    } only %}
-{% endblock %}
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/show_email.html.twig' %}

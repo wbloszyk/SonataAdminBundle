@@ -9,20 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{%- apply trim|raw %}
-    {%- if value is empty -%}
-        &nbsp;
-    {% else %}
-        {%- if truncate|default(null) -%}
-            {% set length = truncate.length|default(30) %}
-            {% set cut = truncate.cut ?? true %}
-            {% set ellipsis = truncate.ellipsis|default('...') %}
-            {{ value|striptags|u.truncate(length, ellipsis, cut)|raw }}
-        {%- else -%}
-            {%- if strip|default(false) -%}
-                {% set value = value|striptags %}
-            {%- endif -%}
-            {{ value|raw }}
-        {% endif %}
-    {% endif %}
-{% endapply -%}
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/display_html.html.twig' %}

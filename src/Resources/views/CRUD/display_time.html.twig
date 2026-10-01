@@ -9,12 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{%- apply trim|raw %}
-    {%- if value is empty -%}
-        &nbsp;
-    {%- else -%}
-        <time datetime="{{ value|date('H:i:sP', 'UTC') }}" title="{{ value|date('H:i:sP', 'UTC') }}">
-            {{ value|date(format|default('H:i:s'), timezone|default(null)) }}
-        </time>
-    {%- endif -%}
-{% endapply -%}
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/display_time.html.twig' %}

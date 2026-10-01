@@ -9,4 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{% extends '@SonataAdmin/Pager/base_results.html.twig' %}
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/Pager/results.html.twig' : '@SonataAdmin/AdminLTE2/Pager/results.html.twig' %}

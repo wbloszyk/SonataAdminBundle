@@ -9,22 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{% if admin.hasAccess('create') and admin.hasRoute('create') %}
-    {% if admin.subClasses is empty %}
-        <li>
-            <a class="sonata-action-element" href="{{ admin.generateUrl('create') }}">
-                <i class="fas fa-plus-circle" aria-hidden="true"></i>
-                {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
-            </a>
-        </li>
-    {% else %}
-        {% for subclass in admin.subclasses|keys %}
-            <li>
-                <a class="sonata-action-element" href="{{ admin.generateUrl('create', {'subclass': subclass}) }}">
-                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
-                    {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }} {{ subclass|trans({}, admin.translationdomain) }}
-                </a>
-            </li>
-        {% endfor %}
-    {% endif %}
-{% endif %}
+{% extends sonata_config.option('theme', '@SonataAdmin/Primary') ~ '/Button/create_button.html.twig' %}

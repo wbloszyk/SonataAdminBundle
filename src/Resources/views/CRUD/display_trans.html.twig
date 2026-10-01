@@ -9,12 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{%- apply trim|raw %}
-    {% set value = value_format|default('%s')|format(value)|trans({}, translation_domain|default('messages')) %}
-
-    {% if safe|default(false) %}
-        {{ value|raw }}
-    {% else %}
-        {{ value }}
-    {% endif %}
-{% endapply -%}
+{% extends sonata_config.option('theme', '@SonataAdmin/Theme/Primary') ~ '/CRUD/display_trans.html.twig' %}
