@@ -615,6 +615,14 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
+                ->scalarNode('asset_driver')
+                    ->defaultValue('assets')
+                    ->validate()
+                        ->ifNotInArray(['assets', 'asset_mapper', 'webpack'])
+                        ->thenInvalid('Invalid asset_driver. Choose one of: assets, asset_mapper, webpack')
+                    ->end()
+                ->end()
+
                 ->arrayNode('assets')
                     ->addDefaultsIfNotSet()
                     ->children()

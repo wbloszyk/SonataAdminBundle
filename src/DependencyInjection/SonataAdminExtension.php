@@ -65,6 +65,7 @@ final class SonataAdminExtension extends Extension
         }
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('asset/asset_driver.php');
         $loader->load('actions.php');
         $loader->load('block.php');
         $loader->load('commands.php');
@@ -81,6 +82,14 @@ final class SonataAdminExtension extends Extension
 
         if (isset($bundles['SonataExporterBundle'])) {
             $loader->load('exporter.php');
+        }
+
+        if (isset($bundles['WebpackEncoreBundle'])) {
+            $loader->load('asset/webpack_driver.php');
+        }
+
+        if ($container->hasDefinition('asset_mapper.importmap.renderer')) {
+            $loader->load('asset/asset_mapper_driver.php');
         }
 
         $configuration = $this->getConfiguration($configs, $container);
@@ -229,6 +238,13 @@ final class SonataAdminExtension extends Extension
         $container
             ->registerForAutoconfiguration(AuditReaderInterface::class)
             ->addTag(AddAuditReadersCompilerPass::AUDIT_READER_TAG);
+
+        $driverType = $config['asset_driver'];
+        $assetDriverId = sprintf('sonata.admin.asset_driver.%s', $driverType);
+
+        if ($container->hasDefinition($assetDriverId)) {
+            $container->setAlias('sonata.admin.asset_driver', $assetDriverId);
+        }
     }
 
     public function getNamespace(): string
