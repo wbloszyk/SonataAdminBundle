@@ -22,6 +22,7 @@ use Sonata\AdminBundle\Twig\Extension\IconExtension;
 use Sonata\AdminBundle\Twig\Extension\RenderElementExtension;
 use Sonata\AdminBundle\Twig\Extension\SecurityExtension;
 use Sonata\AdminBundle\Twig\Extension\SonataAdminExtension;
+use Sonata\AdminBundle\Twig\Extension\SonataAssetsExtension;
 use Sonata\AdminBundle\Twig\Extension\TemplateRegistryExtension;
 use Sonata\AdminBundle\Twig\Extension\XEditableExtension;
 use Sonata\AdminBundle\Twig\GroupRuntime;
@@ -211,9 +212,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 service('sonata.admin.breadcrumbs_builder'),
             ])
 
-        ->set('sonata.admin.twig.assets_extension', SonataAdminExtension::class)
+        ->set('sonata.admin.twig.assets_extension', SonataAssetsExtension::class)
             ->tag('twig.extension')
             ->args([
                 service('sonata.admin.configuration'),
+                service('sonata.admin.asset_driver'),
             ]);
 };
