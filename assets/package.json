@@ -1,5 +1,5 @@
 {
-  "name": "sonata-admin-assets",
+  "name": "@sonata-project/admin-admin-lte-2",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
@@ -7,7 +7,6 @@
     "@fontsource/source-sans-pro": "^4.5",
     "@fortawesome/fontawesome-free": "^5.15",
     "@hotwired/stimulus": "^3.2",
-    "@symfony/stimulus-bridge": "^3.2",
     "admin-lte": "^2.4",
     "bootstrap": "^3.3",
     "icheck": "^1.0",

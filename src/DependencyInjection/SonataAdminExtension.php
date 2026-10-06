@@ -21,6 +21,7 @@ use Sonata\AdminBundle\Util\AdminAclUserManagerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
@@ -39,7 +40,7 @@ use Symfony\Component\Security\Acl\Model\ObjectIdentityInterface;
  * @phpstan-import-type SonataAdminConfiguration from Configuration
  * @phpstan-import-type SonataAdminAsset from Configuration
  */
-final class SonataAdminExtension extends Extension
+final class SonataAdminExtension extends Extension implements PrependExtensionInterface
 {
     public function prepend(ContainerBuilder $container): void
     {

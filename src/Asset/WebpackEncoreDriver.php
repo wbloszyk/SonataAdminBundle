@@ -23,7 +23,7 @@ class WebpackEncoreDriver implements AssetDriverInterface
     {
         $html = '';
         foreach ($stylesheets as $entry) {
-            $html .= $this->encoreExtension->renderWebpackLinkTags($entry);
+            $html .= $this->encoreExtension->renderWebpackLinkTags($entry['path'], $entry['package_name'], 'sonata_admin');
         }
         return $html;
     }
@@ -32,7 +32,7 @@ class WebpackEncoreDriver implements AssetDriverInterface
     {
         $html = '';
         foreach ($entrypoints as $entry) {
-            $html .= $this->encoreExtension->renderWebpackScriptTags($entry);
+            $html .= $this->encoreExtension->renderWebpackScriptTags($entry['path'], $entry['package_name'], 'sonata_admin');
         }
         return $html;
     }
