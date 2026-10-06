@@ -6,11 +6,11 @@ use Sonata\AdminBundle\SonataConfiguration;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class SonataThemeAssetsExtension extends AbstractExtension
+class SonataAssetsExtension extends AbstractExtension
 {
     public function __construct(
         private SonataConfiguration $sonataConfiguration,
-        private AssetDriverInterface $assetDriver // Wstrzyknięty alias sonata.theme.asset_driver
+        private AssetDriverInterface $assetDriver
     ) {}
 
     public function getFunctions(): array

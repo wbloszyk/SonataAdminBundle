@@ -209,5 +209,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ->tag('twig.runtime')
             ->args([
                 service('sonata.admin.breadcrumbs_builder'),
+            ])
+
+        ->set('sonata.admin.twig.assets_extension', SonataAdminExtension::class)
+            ->tag('twig.extension')
+            ->args([
+                service('sonata.admin.configuration'),
             ]);
 };
