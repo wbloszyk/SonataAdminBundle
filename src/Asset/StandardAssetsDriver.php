@@ -13,14 +13,17 @@ declare(strict_types=1);
 
 namespace Sonata\AdminBundle\Asset;
 
+use Symfony\Component\Asset\Packages;
+
 class StandardAssetsDriver implements AssetDriverInterface
 {
-    public function __construct() {}
+    public function __construct(private Packages $assetPackages) {}
 
     public function renderStylesheets(array $stylesheets): string
     {
         $html = '';
-        foreach ($stylesheets as $url) {
+        foreach ($stylesheets as $style) {
+            $url = $this->assetPackages->getUrl($style['path'], $style['package_name']);
             $html .= sprintf('<link rel="stylesheet" href="%s">' . "\n", $url);
         }
         return $html;
@@ -29,7 +32,8 @@ class StandardAssetsDriver implements AssetDriverInterface
     public function renderJavascripts(array $entrypoints): string
     {
         $html = '';
-        foreach ($entrypoints as $url) {
+        foreach ($entrypoints as $style) {
+            $url = $this->assetPackages->getUrl($style['path']);
             $html .= sprintf('<script src="%s"></script>' . "\n", $url);
         }
         return $html;

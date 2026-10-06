@@ -41,6 +41,19 @@ use Symfony\Component\Security\Acl\Model\ObjectIdentityInterface;
  */
 final class SonataAdminExtension extends Extension
 {
+    public function prepend(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('webpack_encore')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('webpack_encore', [
+            'builds' => [
+                'sonata_admin' => '%kernel.project_dir%/public/build/sonata_admin',
+            ],
+        ]);
+    }
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');

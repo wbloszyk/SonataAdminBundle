@@ -17,5 +17,8 @@ use Sonata\AdminBundle\Asset\StandardAssetsDriver;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
       $containerConfigurator->services()
-        ->set('sonata.admin.asset_driver.assets', StandardAssetsDriver::class);
+        ->set('sonata.admin.asset_driver.assets', StandardAssetsDriver::class)
+        ->args([
+            service('assets.packages')
+        ]);
 };

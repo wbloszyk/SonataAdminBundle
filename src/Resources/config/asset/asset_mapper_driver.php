@@ -19,6 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->services()
         ->set('sonata.admin.asset_driver.asset_mapper', AssetMapperDriver::class)
         ->args([
-            service('asset_mapper.importmap.renderer')
+            service('asset_mapper.importmap.renderer'),
+            service('assets.packages')
         ]);
 };
