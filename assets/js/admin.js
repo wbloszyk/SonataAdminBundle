@@ -121,6 +121,17 @@ const Admin = {
         radioClass: 'iradio_square-blue',
       });
 
+      inputs.each((index, input) => {
+        // When the iCheck checkbox is clicked, trigger the change event on the original input
+        jQuery(input).on('ifChanged', () => {
+          input.dispatchEvent(new Event('change', { bubbles: false }));
+        });
+        // When the original input is changed, update the iCheck checkbox
+        jQuery(input).on('change', () => {
+          jQuery(input).iCheck('update');
+        });
+      });
+
       // In case some checkboxes were already checked (for instance after moving
       // back in the browser's session history) update iCheck checkboxes.
       if (subject === window.document) {
